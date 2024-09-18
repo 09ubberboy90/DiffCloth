@@ -197,7 +197,7 @@ void BackwardTaskSolver::setInitialConditions(int demoNum, Simulation *system,
     case DEMO_WEAR_SOCK:
  {
       system->setWindAncCollision(false, true, true);
-      taskInfo.dL_dcontrolPoints = true;
+      taskInfo.dL_dcontrolPoints = false;
       resetSplineConfigsForControlTasks(demoNum, system,  paramGroundtruth);
       break;
     }

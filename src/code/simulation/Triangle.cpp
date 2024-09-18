@@ -160,7 +160,7 @@ Mat9x9d outer(Vec9d a, Vec9d b) {
 
 #ifdef USE_DEBUG
 std::pair<std::vector<Vec9d>, Mat9x9d> Triangle::stretchingForceAndJacobianCheck() const {
-  Mat3x2d F = getDeformationGradient();
+  Mat3x2d F = getDeformationGradient(VecXd());
   Mat2x2d I_two;
   Mat3x3d I_three;
   I_two.setIdentity();

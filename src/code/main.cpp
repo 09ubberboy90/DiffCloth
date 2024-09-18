@@ -114,12 +114,10 @@ int main(int argc, char *argv[]) {
 
   std::vector<std::string> validModes = {"optimize", "visualize"};
   std::vector<std::string> validDemos = {"tshirt", "sock", "hat", "sphere", "dress"};
-  char *modeStr = getCmdOption(argv, argv + argc, "-mode");
-  char *demoNameStr = getCmdOption(argv, argv + argc, "-demo");
-  char *randSeedStr = getCmdOption(argv, argv + argc, "-seed");
-  char *expStr = getCmdOption(argv, argv + argc, "-exp");
-  checkCmdOptionExistsAndValid("-mode", modeStr, validModes);
-  checkCmdOptionExistsAndValid("-demo", demoNameStr, validDemos);
+  char *modeStr = "optimize";
+  char *demoNameStr = "sock";
+  char *randSeedStr = "0";
+  char *expStr = "/home/ubb/Documents/david/DiffCloth/output/wear_sock1-randseed-0-20240918_171610-forwardThresh--9.0-LBFGS";
 
   if (argc == 1) {
     Logging::logFatal(
@@ -141,11 +139,9 @@ int main(int argc, char *argv[]) {
       demo = Demos::DEMO_DRESS_TWIRL;
     }
      if (mode == "visualize") {
-      checkCmdOptionExistsAndValid("-exp", expStr, {});
       std::string expSubFolder = std::string(expStr);
       renderFromFolder(demo, expSubFolder);
     } else if (mode == "optimize") {
-      checkCmdOptionExistsAndValid("-seed", randSeedStr, {});
       runBackwardTask(demo, true, std::atoi(randSeedStr));
     }
     std::printf("Exiting program...\n");

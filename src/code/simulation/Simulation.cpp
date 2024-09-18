@@ -995,9 +995,31 @@ double Simulation::stepFixPoints(double t) {
 
 
     case TrajectoryConfigs::PER_STEP_TRAJECTORY: {
-      for (int fixedPointIdx = 0; fixedPointIdx < sysMat[currentSysmatId].fixedPoints.size(); fixedPointIdx++) {
-        sysMat[currentSysmatId].fixedPoints[fixedPointIdx].pos = rlFixedPointPos.segment(fixedPointIdx * 3, 3);
+
+      // for (int fixedPointIdx = 0; fixedPointIdx < sysMat[currentSysmatId].fixedPoints.size(); fixedPointIdx++)
+      // {
+      //   std::cout <<"Fixed Point" << rlFixedPointPos.segment(fixedPointIdx * 3, 3) << std::endl;
+      //   perstepTrajectory.emplace_back(sysMat[currentSysmatId].fixedPoints[fixedPointIdx].pos);
+      // }
+
+      //rlFixedPointPos needs to be updated every frames somehow
+      // rlFixedPointPos = VecXd({{0.95,2.5,-1+t*10,-0.5,2.4,t*10,0,0,t*10,0,0,t*10}});
+
+      std::vector<Vec3d> temp;
+      std::cout << t << std::endl;
+      for (int fixedPointIdx = 0; fixedPointIdx < sysMat[currentSysmatId].fixedPoints.size(); fixedPointIdx++)
+      {
+        Vec3d posLast = sysMat[currentSysmatId].fixedPoints[fixedPointIdx].pos;
+        posLast(1) += t;
+        sysMat[currentSysmatId].fixedPoints[fixedPointIdx].pos = posLast; // posLast.cross(Vec3d(0, 1, 0)) * 0.012;
+        temp.emplace_back(posLast);
       }
+      rlFixedPointPos = VecXd(temp[0].size() + temp[1].size() + temp[2].size() + temp[3].size());
+      rlFixedPointPos << temp[0], temp[1],temp[2], temp[3];
+      // for (int fixedPointIdx = 0; fixedPointIdx < sysMat[currentSysmatId].fixedPoints.size(); fixedPointIdx++)
+      // {
+      //   sysMat[currentSysmatId].fixedPoints[fixedPointIdx].pos = rlFixedPointPos.segment(fixedPointIdx * 3, 3);
+      // }
 
       perstepTrajectory.emplace_back(rlFixedPointPos);
       break;
@@ -1041,7 +1063,7 @@ void Simulation::stepNN(int idx, const VecXd& x,const VecXd& v,const VecXd& fixe
 
 }
 void Simulation::step() {
-   timeSteptimer = Timer();
+  timeSteptimer = Timer();
   timeSteptimer.enabled = true;
   timeSteptimer.ticStart();
   timeSteptimer.tic("init");
@@ -2057,6 +2079,7 @@ void Simulation::initScene() {
 
     case NO_TRAJECTORY:
     case FIXED_POINT_TRAJECTORY:
+
     case CORNERS_2_UP:
     default: {
       break;

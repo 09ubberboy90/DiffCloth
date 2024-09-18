@@ -76,10 +76,7 @@ endif()
 #if (APPLE)
 #    add_compile_options(-DUSING_MACBOOK)
 #endif ()
-
-if (USE_DEBUG)
-    add_compile_options(-DUSE_DEBUG)
-endif ()
+add_compile_options(-DUSE_DEBUG)
 
 
 message("cxx Flags: " ${CMAKE_CXX_FLAGS})

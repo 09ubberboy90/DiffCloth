@@ -328,27 +328,23 @@ Simulation::SceneConfiguration OptimizationTaskConfigurations::slopeSimplifiedSc
         .name = "slope_simplified"
 };
 
-
-Simulation::SceneConfiguration OptimizationTaskConfigurations::sockScene{ // sockLegUp is Vec3d(0, 1, 0)
-        .fabric =  sock482,
-        .orientation = Orientation::CUSTOM_ORIENTATION,
-        .upVector = Vec3d(0.0, 1.0, 0.0).normalized(),
-        .attachmentPoints = AttachmentConfigs::CUSTOM_ARRAY,
-        .customAttachmentVertexIdx = {{0.0, {14, 30, 3, 81}}}, //sock opening back is 81
-        .trajectory = TrajectoryConfigs::CORNERS_2_WEARSOCK,
-        .primitiveConfig = PrimitiveConfiguration::FOOT,
-        .windConfig = WindConfig::NO_WIND,
-        .camPos = Vec3d(-32.19, 28.88, 11.32),
-        .sockLegOrientation = Vec3d(0, 1, 0),
-        .sceneBbox =  AABB(Vec3d(-7, -5, -7), Vec3d(7, 15, 6)),
-        .timeStep = 1.0 / 160.0,
-        .stepNum = 400,
-        .forwardConvergenceThresh = 1e-9,
-        .backwardConvergenceThresh = 5e-4,
-        .name = "wear_sock1"
-};
-
-
+Simulation::SceneConfiguration OptimizationTaskConfigurations::sockScene{// sockLegUp is Vec3d(0, 1, 0)
+                                                                         .fabric = sock482,
+                                                                         .orientation = Orientation::CUSTOM_ORIENTATION,
+                                                                         .upVector = Vec3d(0.0, 1.0, 0.0).normalized(),
+                                                                         .attachmentPoints = AttachmentConfigs::CUSTOM_ARRAY,
+                                                                         .customAttachmentVertexIdx = {{0.0, {14, 30, 3, 81}}}, // sock opening back is 81
+                                                                         .trajectory = TrajectoryConfigs::PER_STEP_TRAJECTORY,
+                                                                         .primitiveConfig = PrimitiveConfiguration::FOOT,
+                                                                         .windConfig = WindConfig::NO_WIND,
+                                                                         .camPos = Vec3d(-32.19, 28.88, 11.32),
+                                                                         .sockLegOrientation = Vec3d(0, 1, 0),
+                                                                         .sceneBbox = AABB(Vec3d(-7, -5, -7), Vec3d(7, 15, 6)),
+                                                                         .timeStep = 1.0 / 160.0,
+                                                                         .stepNum = 400,
+                                                                         .forwardConvergenceThresh = 1e-9,
+                                                                         .backwardConvergenceThresh = 5e-4,
+                                                                         .name = "wear_sock1"};
 
 Simulation::TaskConfiguration OptimizationTaskConfigurations::demoWindSim2Real = {
         .scene = windScene,
@@ -389,7 +385,7 @@ Simulation::TaskConfiguration OptimizationTaskConfigurations::demoHat = {
 Simulation::TaskConfiguration OptimizationTaskConfigurations::demoSock = {
         .scene = sockScene,
         .hasGroundtruth = false,
-        .generateGroundtruthSimulation = false,
+        .generateGroundtruthSimulation = true,
         .lossType = LossType::ASSISTED_DRESSING_KEYPOINTS
 };
 
