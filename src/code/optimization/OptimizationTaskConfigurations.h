@@ -8,23 +8,25 @@
 
 #include "../simulation/Simulation.h"
 
-class OptimizationTaskConfigurations {
+class OptimizationTaskConfigurations
+{
 public:
-    static Simulation::FabricConfiguration    normalFabric6lowres,   slopeFabricRestOnPlane,
-      conitnuousNormalTestFabric, tshirt1000,   agenthat579, sock482,  dressv7khandsUpDrape, sphereFabric,
-            normalFabric6;
+    static Simulation::FabricConfiguration normalFabric6lowres, slopeFabricRestOnPlane,
+                                           conitnuousNormalTestFabric, tshirt1000, agenthat579, sock482,
+                                           dressv7khandsUpDrape, sphereFabric,
+                                           normalFabric6;
 
 
-    static Simulation::SceneConfiguration simpleScene,   rotatingSphereScene, windScene,
-       tshirtScene,
-            hatScene,  sockScene, dressScene,
-         continousNormalScene, slopeSimplifiedScene;
+    static Simulation::SceneConfiguration simpleScene, rotatingSphereScene, windScene,
+                                          tshirtScene,
+                                          hatScene, sockScene, dressScene,
+                                          continousNormalScene, slopeSimplifiedScene;
 
-    static Simulation::TaskConfiguration demoSphere, demoTshirt, demoWInd, demoHat, demoSock, demoDress, demoWindSim2Real, demoSlope;
+    static Simulation::TaskConfiguration demoSphere, demoTshirt, demoWInd, demoHat, demoSock, demoDress,
+                                         demoWindSim2Real, demoSlope;
     static std::vector<Simulation::SceneConfiguration> sceneConfigArrays;
 
     static std::map<int, Simulation::TaskConfiguration> demoNumToConfigMap;
-
 };
 
 

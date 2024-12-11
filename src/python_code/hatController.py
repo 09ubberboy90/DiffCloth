@@ -1,17 +1,12 @@
 import diffcloth_py as diffcloth
-import numpy as np
-import time, math, random, scipy, utils, common, argparse, torch, os
+import math, random, utils, common, torch, os
 from pySim.pySim import pySim
 from pathlib import Path
-import scipy.optimize
 import numpy as np
-import matplotlib.pyplot as plt
 import torch.optim as optim
 import torch.nn as nn
 import torch.nn.functional
-from torch.optim import Adam, LBFGS
-from datetime import datetime
-from clothNN import Controller, IndClosedController
+from clothNN import IndClosedController
 
 
 
@@ -205,7 +200,7 @@ np.set_printoptions(precision=5)
 root_path = Path(__file__).resolve().parent
 parent_path = root_path / 'experiments' / example 
 exp_path = parent_path/ expName
-diffcloth.enableOpenMP(n_threads = 5)
+diffcloth.enableOpenMP(n_threads=10)
 helper = diffcloth.makeOptimizeHelper(example)
 # forwardConvergence needs to be reset after helper is made
 sim.forwardConvergenceThreshold =  1e-8

@@ -6,8 +6,8 @@
 #define DIFFCLOTH_OPTIMIZATIONTASKSETUP_H
 
 
-class OptimizationTaskSetup {
-
+class OptimizationTaskSetup
+{
 };
 
 
